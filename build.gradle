@@ -1,0 +1,22 @@
+plugins {
+    id 'com.github.blindpirate.gogradle' version '0.10'
+}
+
+golang {
+    packagePath = 'github.com/dron247/gogradle-poc' // go import path of project to be built, NOT local file system path!
+    // The buid mode. There are two alternatives: DEVELOP/REPRODUCIBLE, REPRODUCIBLE by default
+    // This configuration will be overwritten by command line argument -Dgogradle.mode
+    // REP/DEV for abbreviation
+    buildMode = 'DEVELOP'
+}
+
+build {
+    outputLocation = './bin/${PROJECT_NAME}${GOEXE}'
+}
+
+task run(type: com.github.blindpirate.gogradle.Go) {
+    dependsOn build
+    run './bin/${PROJECT_NAME}${GOEXE}'
+}
+
+apply from: 'dependencies.gradle'

@@ -1,0 +1,12 @@
+def artifacts = [ // define the list of artifacts here
+    'github.com/jinzhu/now',
+    'github.com/go-zoo/bone@1.2'
+]
+
+dependencies {
+    golang {
+        artifacts.each {
+            build it
+        }
+    }
+}

@@ -3,11 +3,11 @@ plugins {
 }
 
 def buildInfo = [
-    rootLocation: 'github.com/dron247/gogradle-poc/main',
+    packageName: 'github.com/dron247/gogradle-poc',
     outputLocation: './bin/${PROJECT_NAME}${GOEXE}'
 ]
 golang {
-    packagePath = buildInfo.rootLocation // go import path of project to be built, NOT local file system path!
+    packagePath = buildInfo.packageName // go import path of project to be built, NOT local file system path!
     // The buid mode. There are two alternatives: DEVELOP/REPRODUCIBLE, REPRODUCIBLE by default
     // This configuration will be overwritten by command line argument -Dgogradle.mode
     // REP/DEV for abbreviation
@@ -15,7 +15,7 @@ golang {
 }
 
 build {
-    outputLocation = buildInfo.outputLocation
+   go "build -o $buildInfo.outputLocation"
 }
 
 task run(type: com.github.blindpirate.gogradle.Go) {
